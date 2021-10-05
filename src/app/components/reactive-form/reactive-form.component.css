@@ -5,3 +5,6 @@
 input.ng-touched.ng-invalid {
   border-color: red;
 }
+.field span {
+  display: block;
+}

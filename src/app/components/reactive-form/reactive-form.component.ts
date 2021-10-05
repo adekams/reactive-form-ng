@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -19,14 +19,24 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      firstname: new FormControl('Ade'),
-      lastname: new FormControl('Kams'),
-      password: new FormControl(''),
-      phone: new FormControl(''),
-      email: new FormControl(''),
+      firstname: new FormControl(null, Validators.required),
+      lastname: new FormControl('', Validators.required),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]+$'),
+      ]),
+      phone: new FormControl(null),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       country: new FormControl('b'),
       occupation: new FormControl('developer'),
       success: new FormControl('yes'),
     });
   }
+
+  /*validatePassword(control:FormControl):{[s: string]: boolean} {
+    if(1 ==1) {
+      return {"Invalid password": true}
+    }
+  }*/
 }

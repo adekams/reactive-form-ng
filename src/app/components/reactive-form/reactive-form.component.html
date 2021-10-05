@@ -9,10 +9,26 @@
     <div class="field">
       <label>First Name</label>
       <input type="text" id="firstname" formControlName="firstname" />
+      <span
+        class="data-error"
+        *ngIf="
+          !reactiveForm.get('firstname')?.valid &&
+          reactiveForm.get('firstname')?.touched
+        "
+        >Please provide valid first name</span
+      >
     </div>
     <div class="field">
       <label>Last Name</label>
       <input type="text" id="lastname" formControlName="lastname" />
+      <span
+        class="data-error"
+        *ngIf="
+          !reactiveForm.get('lastname')?.valid &&
+          reactiveForm.get('lastname')?.touched
+        "
+        >Please provide a valid lastname</span
+      >
     </div>
     <div class="field">
       <label>Email</label>
@@ -22,14 +38,48 @@
         formControlName="email"
         placeholder="Email"
       />
+      <span
+        class="data-error"
+        *ngIf="
+          !reactiveForm.get('email')?.valid &&
+          reactiveForm.get('email')?.touched
+        "
+      >
+        <span *ngIf="reactiveForm.get('email').errors.required"
+          >This field is required</span
+        >
+        <span *ngIf="reactiveForm.get('email').hasError('email')"
+          >Please enter a valid email</span
+        >
+      </span>
     </div>
     <div class="field">
       <label>Password</label>
-      <input type="password" id="password" formControlName="password" />
-      <p>
-        Password should be at least 8 char, with at least 1 uppercase and 1
-        special character
-      </p>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="minimun 8 chars, with atleast 1 uppercase & 1 special char"
+      />
+
+      <span
+        class="data-error"
+        *ngIf="
+          !reactiveForm.get('password')?.valid &&
+          reactiveForm.get('password')?.touched
+        "
+      >
+        <span *ngIf="reactiveForm.get('password').hasError('required')"
+          >This field is required</span
+        >
+        <span *ngIf="reactiveForm.get('password').hasError('minlength')"
+          >Password must be atleast 8 characters</span
+        >
+        <span *ngIf="reactiveForm.get('password').hasError('pattern')"
+          >Password must contain atleast 1 uppercase and 1 special
+          character</span
+        >
+      </span>
     </div>
     <div class="field">
       <label>Phone Number</label>
