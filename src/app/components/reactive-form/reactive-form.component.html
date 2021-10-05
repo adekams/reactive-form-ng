@@ -15,7 +15,7 @@
           !reactiveForm.get('firstname')?.valid &&
           reactiveForm.get('firstname')?.touched
         "
-        >Please provide valid first name</span
+        >Please provide a valid first name</span
       >
     </div>
     <div class="field">
@@ -89,7 +89,7 @@
     <div class="field">
       <label for="country">country</label>
       <select class="form-control" id="country" required name="country">
-        <option *ngFor="let country of allCountries" [value]="country">
+        <option *ngFor="let country of countryNames | async" [value]="country">
           {{ country }}
         </option>
       </select>
